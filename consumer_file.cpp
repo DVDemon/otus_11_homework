@@ -1,7 +1,7 @@
 #include "consumer_file.h"
 #include <iostream>
 #include <fstream>
-
+#include <mutex>
 
 std::string homework::FileNameSynchronizer::get_unique_file_name(const std::string &time){
  static std::mutex mtx;
