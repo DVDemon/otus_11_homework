@@ -1,36 +1,19 @@
-#include "lib.h"
-#include "consumer_out.h"
-#include "consumer_file.h"
-#include "producer.h"
-#include <algorithm>
-#include <string>
-#include <cctype>
 
-bool isPositiveInteger(const std::string&& s)
-{
-    return !s.empty() && 
-           (std::count_if(s.begin(), s.end(), [](auto a){return (a>='0'&&a<='9');}) == (long)s.size());
-}
+#include <iostream>
+#include "async.h"
 
-int main(int argc, char *argv[]){
- 
-    if(argc>1)
-    if(isPositiveInteger(std::string(argv[1]))){
-        homework::Producer producer(atoi(argv[1]));
-        homework::ConsumerOut consumer_out(std::cout);
-        homework::ConsumerFile consumer_file;
+auto main() -> int{
 
-        producer.add_customer(&consumer_file);
-        producer.add_customer(&consumer_out);
+    std::size_t bulk = 3;
+    auto h = async::connect(bulk);
+    auto h2 = async::connect(bulk);
+    async::receive(h, "1", 1);
+    async::receive(h2, "1\n", 2);
+    async::receive(h, "\n2\n3\n4\n5\n6\n{\na\n", 15);
+    async::receive(h, "b\nc\nd\n}\n89\n", 11);
+    async::disconnect(h);
+    async::disconnect(h2);
 
 
-        std::string cmd;
-        while(std::cin >> cmd)
-            producer.produce(cmd);
-        producer.flush();
-    }
-
-    UNUSED(argc);
-    UNUSED(argv);
     return 0;
 }

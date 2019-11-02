@@ -1,4 +1,4 @@
-#include "lib.h"
+
 #include "consumer_out.h"
 #include "producer.h"
 #include <gtest/gtest.h>
@@ -27,7 +27,7 @@ TEST(test_braces, basic_test_set)
 {
     testing::internal::CaptureStdout();
 
-    homework::Producer producer(3);
+    homework::Producer producer(5);
     homework::ConsumerOut consumer_out(std::cout);
     producer.add_customer(&consumer_out);
 
@@ -40,10 +40,12 @@ TEST(test_braces, basic_test_set)
     producer.produce(std::string("cmd6"));
     producer.produce(std::string("cmd7"));
     producer.produce(std::string("}"));
+    producer.produce(std::string("cmd8"));
     producer.flush();
+
     std::string output = testing::internal::GetCapturedStdout();
     ASSERT_TRUE(output==std::string(
-        "bulk: cmd1, cmd2, cmd3\nbulk: cmd4, cmd5, cmd6, cmd7\n"
+        "bulk: cmd1, cmd2, cmd3\nbulk: cmd4, cmd5, cmd6, cmd7\nbulk: cmd8\n"
     ));
 
 }

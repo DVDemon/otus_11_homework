@@ -13,7 +13,10 @@ void homework::Producer::produce(std::string str){
             state.braces++;
         }
         else
-        if(str.find('}')!= std::string::npos) state.braces--;
+        if(str.find('}')!= std::string::npos) {
+            state.braces--;
+            if(state.braces==0) notify_bulk();
+        }
         else{
             if(state.count==0) next_command.set_current_time();
             state.count ++;

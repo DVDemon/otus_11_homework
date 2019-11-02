@@ -1,7 +1,7 @@
 #ifndef COMMANDS
 #define COMMANDS
 
-#include "lib.h"
+
 #include <string>
 #include <vector>
 
