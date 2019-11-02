@@ -7,9 +7,9 @@ else()
 endif()
 
 
-find_package(GTest REQUIRED)
-find_package(Threads)
-include_directories(${GTEST_INCLUDE_DIRS})
+#find_package(GTest REQUIRED)
+#find_package(Threads)
+#include_directories(${GTEST_INCLUDE_DIRS})
 
 #add_executable(bulk main.cpp)
 #add_executable(gtests tests.cpp)
