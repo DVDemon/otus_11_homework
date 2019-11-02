@@ -28,7 +28,7 @@ set_target_properties( async  PROPERTIES
 target_compile_options(async PRIVATE -Wall -Wextra -pedantic -Werror )
 #target_compile_options(gtests PRIVATE -Wall -Wextra -pedantic -Werror )
 
-install(TARGETS async RUNTIME DESTINATION bin)
+#install(TARGETS async RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
